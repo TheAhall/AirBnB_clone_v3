@@ -2,12 +2,9 @@
 """
 route for handling State objects and operations
 """
+from flask import jsonify, abort, request
+from api.v1.views import app_views, storage
 from models.city import City
-from models.state import State
-from models import storage
-from api.v1.views import app_views
-from flask import abort, jsonify, make_response, request
-from flasgger.utils import swag_from
 
 
 @app_views.route("/states/<state_id>/cities", methods=["GET"],
