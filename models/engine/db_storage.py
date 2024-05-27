@@ -78,17 +78,6 @@ class DBStorage:
     def get(self, cls, id):
         """
         fetches specific object
-        :param cls: class of object as string
-        :param id: id of object as string
-        :return: found object or None
-        
-        all_class = self.all(cls)
-
-        for obj in all_class.values():
-            if id == str(obj.id):
-                return obj
-
-        return None
         """
         if cls and id:
             if cls in classes.values() and isinstance(id, str):
@@ -103,8 +92,6 @@ class DBStorage:
     def count(self, cls=None):
         """
         count of how many instances of a class
-        :param cls: class name
-        :return: count of instances of a class
         """
         if not cls:
             inst_of_all_cls = self.all()
