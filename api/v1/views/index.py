@@ -24,18 +24,20 @@ def status():
 
     return resp
 
-
-@app_views.route("/stats", methods=['GET'], strict_slashes=False)
+@app_views.route('/stats')
 def stats():
     """
-    stats of all objs route
-    :return: json of all objs
+    Returns the count of all objects by type
     """
-    data = {
-        "states": storage.count("State"),
+    classes = {
+        'amenities': 'Amenity',
+        'cities': 'City',
+        'places': 'Place',
+        'reviews': 'Review',
+        'states': 'State',
+        'users': 'User'
     }
-
-    resp = jsonify(data)
-    resp.status_code = 200
-
-    return resp
+    counts = {}
+    for key, value in classes.items():
+        counts[key] = storage.count(value)
+    return jsonify(counts)
