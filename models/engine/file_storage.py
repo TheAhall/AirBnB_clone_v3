@@ -71,26 +71,24 @@ class FileStorage:
 
     def get(self, cls, id):
         """
-        Retrieves object of a class or all objects of that class
+        gets specific object
+        :param cls: class
+        :param id: id of instance
+        :return: object or None
         """
-        if id and isinstance(id, str):
-            if cls and (cls in classes.keys() or cls in classes.values()):
-                all_objs = self.all(cls)
-                for key, value in all_objs.items():
-                    if id == value.id and key.split('.')[1] == id:
-                        return value
-        return
+        all_class = self.all(cls)
+
+        for obj in all_class.values():
+            if id == str(obj.id):
+                return obj
+
+        return None
 
     def count(self, cls=None):
         """
-        Returns the occurrence of a class or all classes
+        count of instances
+        :param cls: class
+        :return: number of instances
         """
-        occurrence = 0
-        if cls:
-            if cls in classes.keys() or cls in classes.values():
-                occurrence = len(self.all(cls))
-            else:
-                return occurrence
-        if not cls:
-            occurrence = len(self.all())
-        return occurrence
+
+        return len(self.all(cls))
